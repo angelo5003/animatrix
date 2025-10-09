@@ -5,8 +5,15 @@ export async function POST(request: NextRequest) {
     // Get the GraphQL query from the client request
     const body = await request.json();
 
-    // Get API URL from environment variable (or use default)
-    const apiUrl = process.env.ANILIST_URI || "https://graphql.anilist.co";
+    // Get API URL from environment variable
+    const apiUrl = process.env.ANILIST_URI;
+
+    if (!apiUrl) {
+      return NextResponse.json(
+        { error: "API configuration missing" },
+        { status: 500 }
+      );
+    }
 
     // Send the request to AniList API from the server
     const response = await fetch(apiUrl, {
