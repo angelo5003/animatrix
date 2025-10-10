@@ -1,22 +1,11 @@
 "use client";
 
-import { gql } from "@apollo/client";
-import { useQuery } from "@apollo/client/react";
-
-const TEST_QUERY = gql`
-  query {
-    Media(id: 1) {
-      id
-      title {
-        romaji
-        english
-      }
-    }
-  }
-`;
+import { useGetAnimeDataQuery } from "@/libs/graphql/generated/graphql";
 
 export default function TestPage() {
-  const { data, loading, error } = useQuery(TEST_QUERY);
+  const { data, loading, error } = useGetAnimeDataQuery({
+    variables: { page: 1 },
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -24,7 +13,11 @@ export default function TestPage() {
   return (
     <div>
       <h2>✅ AniList Test Query Result:</h2>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <ul>
+        {data?.Page?.media?.map((anime) => {
+          return <li key={anime?.id}>{anime?.title?.romaji}</li>;
+        })}
+      </ul>
     </div>
   );
 }
