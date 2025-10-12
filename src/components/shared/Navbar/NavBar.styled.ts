@@ -10,4 +10,7 @@ export const NavBarContainerList = styled(List.Root)`
   position: fixed;
   bottom: 0;
   width: 100%;
+  list-style: none;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
 `;

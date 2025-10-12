@@ -4,6 +4,12 @@ import "./globals.css";
 import ApolloProviderWrapper from "@/libs/graphql/apollo/ApolloWrapper/ApolloWrapper";
 import NavBar from "@/components/shared/Navbar/NavBar";
 import { Container } from "@chakra-ui/react";
+import { Outfit } from "next/font/google";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Animatrix",
@@ -17,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={outfit.className}>
         <ApolloProviderWrapper>
           <ChakraProvider>
             <Container>{children}</Container>
