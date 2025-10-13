@@ -17,6 +17,7 @@ const NavBar: React.FC = () => {
       <NavBarContainerList p={4}>
         {navBarItems.map((navItem) => {
           const isActive = isActiveNavLink(navItem.href);
+          const IconComponent = navItem.icon;
           return (
             <List.Item key={navItem.href} p={2}>
               <ChakraLink
@@ -24,7 +25,10 @@ const NavBar: React.FC = () => {
                 focusRing={"none"}
                 color={isActive ? "teal.500" : "white"}
               >
-                <Link href={navItem.href}>{navItem.name}</Link>
+                <Link href={navItem.href}>
+                  {IconComponent && <IconComponent />}
+                  {navItem.name}
+                </Link>
               </ChakraLink>
             </List.Item>
           );
