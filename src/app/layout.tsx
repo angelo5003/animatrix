@@ -26,8 +26,8 @@ export default function RootLayout({
       <body className={outfit.className}>
         <ApolloProviderWrapper>
           <ChakraProvider>
-            <Container>{children}</Container>
             <NavBar />
+            <Container fluid={true}>{children}</Container>
           </ChakraProvider>
         </ApolloProviderWrapper>
       </body>

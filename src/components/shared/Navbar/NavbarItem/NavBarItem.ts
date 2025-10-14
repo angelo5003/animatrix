@@ -13,27 +13,24 @@ export const navBarItems: NavBarItem[] = [
     icon: Home,
   },
   {
-    name: "About",
-    href: "/about",
-    icon: User,
-  },
-  {
-    name: "Contact",
-    href: "/contact",
-    icon: Bell,
-  },
-  {
-    name: "Blog",
-    href: "/blog",
-    icon: Bookmark,
-  },
-  {
     name: "Portfolio",
     href: "/portfolio",
     icon: Search,
   },
   {
-    name: "Services",
-    href: "/services",
+    name: "Notifications",
+    href: "/notifications",
+    icon: Bell,
+  },
+  {
+    name: "Favorites",
+    href: "/favorites",
+    icon: Bookmark,
+  },
+
+  {
+    name: "Account",
+    href: "/account",
+    icon: User,
   },
 ];
