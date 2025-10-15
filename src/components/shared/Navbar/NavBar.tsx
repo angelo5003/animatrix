@@ -19,16 +19,17 @@ const NavBar: React.FC = () => {
   const activeNavItem = navBarItems.find((navItem) =>
     isActiveNavLink(navItem.href)
   );
+
   return (
     <Box as="nav">
       <NavBarContainerList
-        p={4}
+        p={{ base: 4, md: 2 }}
         display={{ base: "flex" }}
         justifyContent="space-around"
         alignItems="center"
-        position="fixed"
+        position={{ base: "fixed", md: "static" }}
         bottom={{ base: 0, md: "auto" }}
-        top={{ base: "auto", md: 0 }}
+        top={{ base: "auto", md: "auto" }}
       >
         {navBarItems.map((navItem) => {
           const isActive = isActiveNavLink(navItem.href);
@@ -41,14 +42,26 @@ const NavBar: React.FC = () => {
                 color={isActive ? "teal.500" : "white"}
               >
                 <Link href={navItem.href}>
-                  {IconComponent && <IconComponent />}
+                  <Box
+                    display={{ base: "flex", md: "none" }}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    {IconComponent && <IconComponent />}
+                  </Box>
+                  <Text display={{ base: "none", md: "block" }}>
+                    {navItem.name}
+                  </Text>
                 </Link>
               </ChakraLink>
             </List.Item>
           );
         })}
 
-        <StyledActiveLinkLabelContainer>
+        <StyledActiveLinkLabelContainer
+          display={{ base: "flex", md: "none" }}
+          borderRadius={{ base: "0" }}
+        >
           {activeNavItem && <Text>{activeNavItem.name}</Text>}
         </StyledActiveLinkLabelContainer>
       </NavBarContainerList>

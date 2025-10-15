@@ -8,7 +8,7 @@ import { Outfit } from "next/font/google";
 
 const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -25,9 +25,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={outfit.className}>
         <ApolloProviderWrapper>
-          <ChakraProvider>
+          <ChakraProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <NavBar />
-            <Container fluid={true}>{children}</Container>
+            <Container pb={{ base: "120px", md: 0 }}>{children}</Container>
           </ChakraProvider>
         </ApolloProviderWrapper>
       </body>

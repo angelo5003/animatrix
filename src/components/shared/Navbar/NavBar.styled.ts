@@ -2,12 +2,13 @@ import styled from "@emotion/styled";
 import { Box, List } from "@chakra-ui/react";
 
 export const NavBarContainerList = styled(List.Root)`
-  background-color: red;
+  background-color: #1a202c;
   flex-direction: row;
   width: 100%;
   list-style: none;
   border-top-right-radius: 1rem;
   border-top-left-radius: 1rem;
+  z-index: 1000;
 `;
 
 export const StyledActiveLinkLabelContainer = styled(Box)`
@@ -21,4 +22,6 @@ export const StyledActiveLinkLabelContainer = styled(Box)`
   background-color: #3c3533;
   bottom: 0;
   padding: 0.125rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 `;
