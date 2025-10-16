@@ -13,8 +13,8 @@ export const navBarItems: NavBarItem[] = [
     icon: Home,
   },
   {
-    name: "Portfolio",
-    href: "/portfolio",
+    name: "Search",
+    href: "/search",
     icon: Search,
   },
   {

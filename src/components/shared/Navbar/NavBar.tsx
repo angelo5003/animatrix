@@ -1,13 +1,11 @@
 "use client";
 
 import { Box, List, Link as ChakraLink, Text } from "@chakra-ui/react";
-import {
-  NavBarContainerList,
-  StyledActiveLinkLabelContainer,
-} from "@/components/shared/Navbar/NavBar.styled";
+
 import { navBarItems } from "./NavbarItem/NavBarItem";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NavBarContainerList } from "./NavBar.styled";
 
 const NavBar: React.FC = () => {
   const pathname = usePathname();
@@ -23,13 +21,15 @@ const NavBar: React.FC = () => {
   return (
     <Box as="nav">
       <NavBarContainerList
-        p={{ base: 4, md: 2 }}
+        p={{ base: 2, md: 2 }}
         display={{ base: "flex" }}
         justifyContent="space-around"
         alignItems="center"
         position={{ base: "fixed", md: "static" }}
         bottom={{ base: 0, md: "auto" }}
         top={{ base: "auto", md: "auto" }}
+        borderTopLeftRadius={{ base: "1rem", md: "0" }}
+        borderTopRightRadius={{ base: "1rem", md: "0" }}
       >
         {navBarItems.map((navItem) => {
           const isActive = isActiveNavLink(navItem.href);
@@ -58,12 +58,23 @@ const NavBar: React.FC = () => {
           );
         })}
 
-        <StyledActiveLinkLabelContainer
+        <Box
           display={{ base: "flex", md: "none" }}
-          borderRadius={{ base: "0" }}
+          justifyContent="center"
+          alignItems="center"
+          position="absolute"
+          left={0}
+          right={0}
+          width="100%"
+          bottom={0}
+          p="0.125rem"
         >
-          {activeNavItem && <Text>{activeNavItem.name}</Text>}
-        </StyledActiveLinkLabelContainer>
+          {activeNavItem && (
+            <Text fontSize={{ base: "sm", md: "md" }}>
+              {activeNavItem.name}
+            </Text>
+          )}
+        </Box>
       </NavBarContainerList>
     </Box>
   );
