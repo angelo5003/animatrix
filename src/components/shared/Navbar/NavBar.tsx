@@ -6,6 +6,7 @@ import { navBarItems } from "./NavbarItem/NavBarItem";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NavBarContainerList } from "./NavBar.styled";
+import SearchBar from "../SearchBar/SearchBar";
 
 const NavBar: React.FC = () => {
   const pathname = usePathname();
@@ -31,6 +32,7 @@ const NavBar: React.FC = () => {
         borderTopLeftRadius={{ base: "1rem", md: "0" }}
         borderTopRightRadius={{ base: "1rem", md: "0" }}
       >
+        <SearchBar />
         {navBarItems.map((navItem) => {
           const isActive = isActiveNavLink(navItem.href);
           const IconComponent = navItem.icon;
