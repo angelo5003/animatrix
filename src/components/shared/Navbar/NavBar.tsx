@@ -1,7 +1,8 @@
 "use client";
 
-import { Box, List, Link as ChakraLink, Text } from "@chakra-ui/react";
-
+import React, { Fragment } from "react";
+import { Box, List, Link as ChakraLink, Text, Button } from "@chakra-ui/react";
+import { Search } from "lucide-react";
 import { navBarItems } from "./NavbarItem/NavBarItem";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -36,27 +37,61 @@ const NavBar: React.FC = () => {
         {navBarItems.map((navItem) => {
           const isActive = isActiveNavLink(navItem.href);
           const IconComponent = navItem.icon;
+
           return (
-            <List.Item key={navItem.href} p={4}>
-              <ChakraLink
-                asChild
-                focusRing={"none"}
-                color={isActive ? "teal.500" : "white"}
-              >
-                <Link href={navItem.href}>
-                  <Box
-                    display={{ base: "flex", md: "none" }}
-                    justifyContent="center"
+            <Fragment key={navItem.href}>
+              <List.Item p={4}>
+                <ChakraLink
+                  asChild
+                  focusRing={"none"}
+                  color={isActive ? "teal.500" : "white"}
+                >
+                  <Link href={navItem.href}>
+                    <Box
+                      display={{ base: "flex", md: "none" }}
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      {IconComponent && <IconComponent />}
+                    </Box>
+                    <Text display={{ base: "none", md: "block" }}>
+                      {navItem.name}
+                    </Text>
+                  </Link>
+                </ChakraLink>
+              </List.Item>
+
+              {/* Insert search button after Home */}
+              {navItem.href === "/" && (
+                <List.Item p={4}>
+                  <Button
+                    variant="ghost"
+                    p={0}
+                    flex="none"
+                    minW="auto"
+                    w="auto"
+                    h="auto"
+                    lineHeight="1"
+                    verticalAlign="baseline"
+                    display="inline-flex"
                     alignItems="center"
+                    justifyContent="center"
+                    onClick={() => {
+                      console.log("Opening search dialog");
+                    }}
+                    aria-label="Search"
                   >
-                    {IconComponent && <IconComponent />}
-                  </Box>
-                  <Text display={{ base: "none", md: "block" }}>
-                    {navItem.name}
-                  </Text>
-                </Link>
-              </ChakraLink>
-            </List.Item>
+                    <Box
+                      display={{ base: "flex", md: "none" }}
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Search style={{ width: 24, height: 24 }} color="white" />
+                    </Box>
+                  </Button>
+                </List.Item>
+              )}
+            </Fragment>
           );
         })}
 

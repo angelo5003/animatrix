@@ -1,4 +1,4 @@
-import { Home, Search, Bookmark, User, Bell } from "lucide-react";
+import { Home, Bookmark, User, Bell } from "lucide-react";
 
 type NavBarItem = {
   name: string;
@@ -12,11 +12,7 @@ export const navBarItems: NavBarItem[] = [
     href: "/",
     icon: Home,
   },
-  {
-    name: "Search",
-    href: "/search",
-    icon: Search,
-  },
+
   {
     name: "Notifications",
     href: "/notifications",
