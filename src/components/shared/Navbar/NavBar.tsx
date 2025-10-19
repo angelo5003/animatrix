@@ -1,7 +1,14 @@
 "use client";
 
 import React, { Fragment } from "react";
-import { Box, List, Link as ChakraLink, Text, Button } from "@chakra-ui/react";
+import {
+  Box,
+  List,
+  Link as ChakraLink,
+  Text,
+  Button,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { Search } from "lucide-react";
 import { navBarItems } from "./NavbarItem/NavBarItem";
 import Link from "next/link";
@@ -11,6 +18,7 @@ import SearchBar from "../SearchBar/SearchBar";
 
 const NavBar: React.FC = () => {
   const pathname = usePathname();
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
   const isActiveNavLink = (href: string) => {
     return pathname === href;
@@ -33,7 +41,7 @@ const NavBar: React.FC = () => {
         borderTopLeftRadius={{ base: "1rem", md: "0" }}
         borderTopRightRadius={{ base: "1rem", md: "0" }}
       >
-        <SearchBar />
+        {!isMobile && <SearchBar />}
         {navBarItems.map((navItem) => {
           const isActive = isActiveNavLink(navItem.href);
           const IconComponent = navItem.icon;
@@ -47,22 +55,25 @@ const NavBar: React.FC = () => {
                   color={isActive ? "teal.500" : "white"}
                 >
                   <Link href={navItem.href}>
-                    <Box
-                      display={{ base: "flex", md: "none" }}
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      {IconComponent && <IconComponent />}
-                    </Box>
-                    <Text display={{ base: "none", md: "block" }}>
+                    {isMobile && (
+                      <Box
+                        display={{ base: "flex" }}
+                        justifyContent="center"
+                        alignItems="center"
+                      >
+                        {IconComponent && <IconComponent />}
+                      </Box>
+                    )}
+
+                    <Text display={{ base: "none", md: "flex" }}>
                       {navItem.name}
                     </Text>
                   </Link>
                 </ChakraLink>
               </List.Item>
 
-              {/* Insert search button after Home */}
-              {navItem.href === "/" && (
+              {/* Insert search button after Home - only on mobile */}
+              {navItem.href === "/" && isMobile && (
                 <List.Item p={4}>
                   <Button
                     variant="ghost"
@@ -82,7 +93,7 @@ const NavBar: React.FC = () => {
                     aria-label="Search"
                   >
                     <Box
-                      display={{ base: "flex", md: "none" }}
+                      display="flex"
                       justifyContent="center"
                       alignItems="center"
                     >
@@ -94,24 +105,25 @@ const NavBar: React.FC = () => {
             </Fragment>
           );
         })}
-
-        <Box
-          display={{ base: "flex", md: "none" }}
-          justifyContent="center"
-          alignItems="center"
-          position="absolute"
-          left={0}
-          right={0}
-          width="100%"
-          bottom={0}
-          p="0.125rem"
-        >
-          {activeNavItem && (
-            <Text fontSize={{ base: "sm", md: "md" }}>
-              {activeNavItem.name}
-            </Text>
-          )}
-        </Box>
+        {isMobile && (
+          <Box
+            display={{ base: "flex" }}
+            justifyContent="center"
+            alignItems="center"
+            position="absolute"
+            left={0}
+            right={0}
+            width="100%"
+            bottom={0}
+            p="0.125rem"
+          >
+            {activeNavItem && (
+              <Text fontSize={{ base: "sm", md: "md" }}>
+                {activeNavItem.name}
+              </Text>
+            )}
+          </Box>
+        )}
       </NavBarContainerList>
     </Box>
   );
